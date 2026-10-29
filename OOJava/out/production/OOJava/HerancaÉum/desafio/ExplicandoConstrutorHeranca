@@ -1,0 +1,16 @@
+/* Quando se tem herança, existe uma hierarquia a hora de chamar os construtores, como assim?
+Digamos que tengo Veiculo, Carro, Ferrari.
+Ferrari herda de Carro, Carro herda de Veiculo(So pode ter 1 classe pai na herança).
+Quando eu nao defino nenhum construtor, o java disponibiliza o padrao que é o construtor sem parametros, e quando
+eu instancio um objeto de uma subclasse, o construtor padrao dela automaticamente dentro dele chama o construtor padrao
+da classe pai, da super classe: /* Carro(){
+                                super();
+                                          } 
+Lembrando que super é a palavra reservada pra me referir sempre a super classe da subclasse atual.
+Entao por padrao o java chama o construtor da superclasse pra que possa haver herança.
+Primeiro a super classe é instanciada DENTRO da memoria, depois a subclasse, para que possa haver o reuso do codigo da classe pai, 
+dentro da classe filha.
+O java exige isso porque o construtor do pai precisa rodar primeiro para que a base(a classe pai) esteja totalmente configurada
+antes da classe filha adicionar suas proprias caracteristicas ao ser instanciada.
+Quando eu mudo o construtor padrao da classe pai dessa subclasse atual, eu obrigatoriamente tenho que criar um construtor
+pra subclasse e chamar atraves do super() o construtor da superclasse dela e ajustar o que for preciso. */

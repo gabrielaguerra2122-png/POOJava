@@ -1,0 +1,43 @@
+Basicamente a ideia desse desafio era por em pratica os relacionamentos por composição.
+Na composição, ao inves de criar uma classe so pra definir um sistema, eu crio varias classes que estarão
+uma ligada a outra por atributos das outras classes. O relacionamento so ganha vida quando eu instancio os objetos.
+Praticamente todos os relacionamentos desse desafio sao 1 para N. Cliente tem varias compras, mas cada compra so
+pertence a um cliente. Compra tem varios itens, mas cada item pertence a apenas 1 compra. E produto pode pertencer a varios
+objetos itens instanciados diferentes, mas cada item instanciado so faz referencia a 1 produto(Item e Produto na vida real sao
+quase a mesma coisa, o item basicamente une a quantidade desejada do produto, sem alterar o produto original, na nota
+fiscal ao inves de chamar o produto de produto, se chama item, e ele assume esse papel pra facilitar na hora de criar produtos.)
+Se nao tivesse a classe Item, um produto(mesmo nome, preço) seria criado VARIAS vezes pra adicionar cada 1 com x quantidades em 
+compras diferentes, mas com o Item eu posso pegar a referencia de memoria desse produto, e so definir a quantidade q eu quero nessa lista
+de itens q tem em uma compra.
+
+Sobre a questao de atribuição por referencia:
+Ao instanciar um objeto do tipo cliente, a variavel que eu atribui ele guarda um endereço de memoria q aponta pro objeto cliente.
+Dentro do objeto cliente, ele tem um atribuo objeto do tipo lista, que ja é instanciado assim que cada cliente é instanciado, a variavel
+"compras" que é o nome da variavel da lista de compras, guarda um endereço de memoria pro objeto lista.
+dentro dessa lista ele vai armazenas apenas objetos do tipo Compra, e cada indice dessa lista de compras guarda um endereço
+(seja compartilhado por essa lista e a variavel do objeto compra ja criado fora da lista, ou armazenado apenas na lista pq
+eu posso instanciar logo dentro dela) e esse endereço aponta pra algum objeto Compra q eu instanciei.
+Cada objeto compra tem um atributo objeto do tipo lista referenciado por "itens"(a variavel dele), a variavel "itens" armazena o endereço 
+do objeto lista, e esse objeto lista dentro de Compra armazena apenas objetos do tipo ITEM, cada indice dessa lista dentro de compras
+guarda um endereço de memoria que aponta pra algum item especifico q eu criei fora ou dentro da propria lista(lembrando q é tudo copia 
+da referencia de memoria do obj), e esse objeto item guarda dentro dele um valor literal(primitivo) e UM objeto do tipo Produto.
+Item como eu disse so faz sentido guardar 1 produto, e produto é apenas um documento estatico(igual para todos, mesmo nome, mesmo preço), ele
+nao tem relação com ninguem, apenas usam os dados dele, pq nao faria sentido o produto saber a qual item ele pertence,
+pois um objt produto pode pertencer a varios objts itens, mas um objt Item tem so 1 objt produto. E nao teria como um produto fazer referencia
+a todos os itens a qual ele pertence, so se tivesse uma lista mas isso seria incoerente e daria mais erros dq solução.
+
+Ao inves de fazer tudo unidirecional, onde so o cliente saberia quais objts compras pertencem a ele, mas od objts compras nao saberiam a qual
+objt cliente ele pertence. Onde objt compra sabe quais objts itens pertence a ele, mas os objts itens nao sabem a qual compra eles pertencem.
+Fez mais sentido fazer bidirecional, nesses casos, mas no caso do Item e Produto so fez e faria sentido ser unidirecional(so o item
+sabe qual é o objt produto pertencente a ele) e produto nao sabe quais itens ele pertence.
+Fez mais sentido o uni pq varios objetos item podem ter seu atributo produto apontando para a mesma referncia de memoria(msm produto).
+
+DICA:
+A priore voce cria no primeiro momento, relações unidirecionais(so um lado tem dependencia/depende da outra e sabe da existencia dela), 
+e caso seja necessario, caso tenha cenarios que seja importante e faça sentido ter relações bidirecionais(os dois lados, as duas classes 
+tem dependencia uma da outra, dependem uma da outra, e as duas sabem da existencia uma da outra), ai sim voce faz relações bidirecionais.
+Relacao unidirecional = so uma classe conhece e possui referencia(que é feita atraves de obj) para outra classe.
+Relacao bidirecional = quando as duas classes possuem referencias mutuas, permitindo navegação em ambas as direções.
+Referencia entre as classes é feita a partir de qnd q eu defino que uma classe tem um atributo objeto do tipo da outra classe,
+mas a relação e a referencia em si so acontece qnd eu instancio objetos e atribuo a eles referencias, pq a classe é so o molde,
+ele nao age, quem age é o objeto.
